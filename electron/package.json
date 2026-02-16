@@ -5,7 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "electron-builder"
+    "build": "npx electron-builder",
+    "build:win": "npx electron-builder --win"
   },
   "author": "",
   "license": "MIT",
