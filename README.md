@@ -1,6 +1,6 @@
 # Mini Notes
 
-A minimal notes app optimized for e-ink displays (600×800), such as the Minimal Phone.
+A minimal notes app optimized for e-ink displays (600×800), such as the Minimal Phone. It also comes with a desktop client.
 
 Mostly created by cursor composer model
 
@@ -11,18 +11,21 @@ Mostly created by cursor composer model
 - **Markdown files**: Notes saved as `.md` files in app storage
 - **WebDAV sync**: Optional cloud sync (Nextcloud, etc.) via Settings
 
-## Build
+## Platforms
+
+### Android
 
 ```bash
+cd android
 # Ensure ANDROID_HOME is set (or create local.properties with sdk.dir)
 ./gradlew assembleDebug
 ```
 
-APK output: `app/build/outputs/apk/debug/app-debug.apk`
+APK output: `android/app/build/outputs/apk/debug/app-debug.apk`
 
-### Release build
+#### Release build
 
-1. Create a keystore (one-time):
+1. Create a keystore (one-time, from `android/`):
    ```bash
    keytool -genkey -v -keystore release.keystore -alias mininotes -keyalg RSA -keysize 2048 -validity 10000
    ```
@@ -34,15 +37,32 @@ APK output: `app/build/outputs/apk/debug/app-debug.apk`
    ./gradlew assembleRelease
    ```
 
-Output: `app/build/outputs/apk/release/app-release.apk`
+Output: `android/app/build/outputs/apk/release/app-release.apk`
 
-## Install on device
+#### Install on device
 
 ```bash
-adb install app/build/outputs/apk/debug/app-debug.apk
+adb install android/app/build/outputs/apk/debug/app-debug.apk
 # or for release:
-adb install app/build/outputs/apk/release/app-release.apk
+adb install android/app/build/outputs/apk/release/app-release.apk
 ```
+
+### Electron (Desktop)
+
+```bash
+cd electron
+npm install
+npm start
+```
+
+To build distributable packages:
+
+```bash
+cd electron
+npm run build
+```
+
+Output: `electron/dist/`
 
 ## GitHub Release
 
@@ -64,7 +84,7 @@ adb install app/build/outputs/apk/release/app-release.apk
 3. Enter username and password (HTTP Basic auth)
 4. Tap **Save**, then **Sync Now**
 
-Sync runs automatically on app start and when you tap Sync. Notes auto-upload 5 seconds after you stop typing.
+Sync runs automatically on app start and when you tap Sync. Notes auto-upload 5 seconds after you stop typing. (Android and Electron)
 
 ## Design
 
